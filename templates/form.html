@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ "Editar producto" if producto else "Nuevo producto" }}
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-7">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body">
+
+                <h2 class="mb-4">
+                    {{ "Editar producto" if producto else "Registrar producto" }}
+                </h2>
+
+                <form method="POST">
+
+                    <div class="mb-3">
+                        <label class="form-label">Código</label>
+
+                        <input
+                            type="text"
+                            name="codigo"
+                            class="form-control"
+                            required
+                            value="{{ producto.codigo if producto else '' }}"
+                        >
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Nombre</label>
+
+                        <input
+                            type="text"
+                            name="nombre"
+                            class="form-control"
+                            required
+                            value="{{ producto.nombre if producto else '' }}"
+                        >
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Categoría</label>
+
+                        <input
+                            type="text"
+                            name="categoria"
+                            class="form-control"
+                            required
+                            value="{{ producto.categoria if producto else '' }}"
+                        >
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Precio</label>
+
+                        <input
+                            type="number"
+                            name="precio"
+                            class="form-control"
+                            step="0.01"
+                            min="0.01"
+                            required
+                            value="{{ producto.precio if producto else '' }}"
+                        >
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Existencia</label>
+
+                        <input
+                            type="number"
+                            name="existencia"
+                            class="form-control"
+                            min="0"
+                            required
+                            value="{{ producto.existencia if producto else '' }}"
+                        >
+                    </div>
+
+                    <div class="form-check mb-4">
+
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="activo"
+                            id="activo"
+                            {% if not producto or producto.activo %}checked{% endif %}
+                        >
+
+                        <label class="form-check-label" for="activo">
+                            Producto activo
+                        </label>
+
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        Guardar
+                    </button>
+
+                    <a href="{{ url_for('index') }}" class="btn btn-secondary">
+                        Cancelar
+                    </a>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
